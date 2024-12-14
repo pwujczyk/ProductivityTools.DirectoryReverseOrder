@@ -18,4 +18,29 @@ function Set-DirectoryInReverseOrder {
         $count--
     }
 }
+
+function Remove-Prefix{
+    [cmdletbinding()]
+    param ([string]$Directory)
+
+    Write-Output "Hello"
+    Write-Output "HelloVerbose"
+    $dirs = Get-ChildItem -Path $Directory  | ? { $_.PSIsContainer }
+    foreach ($dir in $dirs) {
+
+        $fourth=$dir.Name.Substring(3,1)
+        Write-Verbose $fourth
+        if ($fourth=="_"){
+            $name = $dir.Name.Substring(0,4)
+
+        }
+
+        
+        Write-Verbose $name
+        #Rename-Item -Path $dir.FullName -NewName $targetName
+
+        #$count--
+    }
+}
+
 Export-ModuleMember Set-DirectoryInReverseOrder
