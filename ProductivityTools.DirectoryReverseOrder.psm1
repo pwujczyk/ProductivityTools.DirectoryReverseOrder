@@ -3,12 +3,12 @@
 
 function Set-DirectoryInReverseOrder {
     [cmdletbinding()]
-    param ([string]$Directory, [int]$LeadingBuffor)
+    param ([string]$Directory, [int]$LeadingBuffer)
 
     Write-Output "Hello"
     Write-Output "HelloVerbose"
     $dirs = Get-ChildItem -Path $Directory  | ? { $_.PSIsContainer }
-    $count = $dirs.Length
+    $count = $dirs.Length + $LeadingBuffer
     foreach ($dir in $dirs) {
         $number = '{0:d3}' -f $count
         $targetName = $number + "_" + $dir.Name
