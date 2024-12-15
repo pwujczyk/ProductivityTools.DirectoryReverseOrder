@@ -3,7 +3,7 @@
 
 function Set-DirectoryInReverseOrder {
     [cmdletbinding()]
-    param ([string]$Directory)
+    param ([string]$Directory, [int]$LeadingBuffor)
 
     Write-Output "Hello"
     Write-Output "HelloVerbose"
@@ -23,24 +23,34 @@ function Remove-Prefix{
     [cmdletbinding()]
     param ([string]$Directory)
 
-    Write-Output "Hello"
+    Write-Output "Hello Remove-Prefix"
     Write-Output "HelloVerbose"
+    Write-Verbose "Analyzing directory $Directory"
     $dirs = Get-ChildItem -Path $Directory  | ? { $_.PSIsContainer }
     foreach ($dir in $dirs) {
-
-        $fourth=$dir.Name.Substring(3,1)
+        Write-Verbose "================"
+        $name=$dir.Name
+        Write-Verbose $name
+        $fourth=$name[3]
         Write-Verbose $fourth
-        if ($fourth=="_"){
-            $name = $dir.Name.Substring(0,4)
-
+        if ($fourth -eq "_"){
+            $numberString=$name.Substring(0,3);
+            Write-Verbose($number)
+            $number=[int]::Parse($numberString);
+            if ($number -gt 0)
+            {
+                Write-Verbose "We can remove it"
+                $newName=$name.Substring(4)
+                Write-Verbose "New name: $newName"
+                Rename-Item -Path $dir.FullName -NewName $newName
+            }
         }
 
         
-        Write-Verbose $name
-        #Rename-Item -Path $dir.FullName -NewName $targetName
 
         #$count--
     }
 }
 
 Export-ModuleMember Set-DirectoryInReverseOrder
+Export-ModuleMember Remove-Prefix
