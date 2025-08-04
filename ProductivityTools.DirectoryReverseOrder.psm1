@@ -3,7 +3,7 @@
 
 function Set-DirectoryInReverseOrder {
     [cmdletbinding()]
-    param ([string]$Directory, [int]$LeadingBuffer)
+    param ([string]$Directory = ".", [int]$LeadingBuffer)
 
     Write-Output "Hello"
     Write-Output "HelloVerbose"
@@ -19,9 +19,9 @@ function Set-DirectoryInReverseOrder {
     }
 }
 
-function Remove-Prefix{
+function Remove-PrefixFromDirectoryName{
     [cmdletbinding()]
-    param ([string]$Directory)
+    param ([string]$Directory = ".")
 
     Write-Output "Hello Remove-Prefix"
     Write-Output "HelloVerbose"
@@ -53,4 +53,4 @@ function Remove-Prefix{
 }
 
 Export-ModuleMember Set-DirectoryInReverseOrder
-Export-ModuleMember Remove-Prefix
+Export-ModuleMember Remove-PrefixFromDirectoryName
