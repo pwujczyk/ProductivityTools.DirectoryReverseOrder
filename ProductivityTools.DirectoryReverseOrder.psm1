@@ -35,7 +35,7 @@ function Remove-PrefixFromDirectoryName{
         Write-Verbose $fourth
         if ($fourth -eq "_"){
             $numberString=$name.Substring(0,3);
-            Write-Verbose($number)
+            Write-Verbose($numberString)
             $number=[int]::Parse($numberString);
             if ($number -gt 0)
             {
